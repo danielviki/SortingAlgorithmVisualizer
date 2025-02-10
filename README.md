@@ -1,1 +1,62 @@
 This is a Python playground project for Daniel personal use
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+eggs/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.env/
+.venv/
+ENV/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.mypy_cache/
+
+# Local development settings
+.env
+.env.local
+*.log
+local_settings.py
+
+# Database
+*.db
+*.sqlite3
+*.sqlite
+
+# Documentation
+docs/_build/
+site/
+
+# Backup files
+*.bak
+*.tmp
+*~
+
+# Dependencies
+pip-log.txt
+pip-delete-this-directory.txt
