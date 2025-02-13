@@ -24,22 +24,43 @@ def selection_sort(a):
         print(f"选择交换 {a[i]}↔{a[min_idx]}，当前序列：{a}")
     return a
 
-def quick_sort(a):
-    if len(a) <= 1:
+def quick_sort(a, start=None, end=None):
+    if start is None:
+        start = 0
+        end = len(a) - 1
+    
+    if start >= end:
         return a
-    pivot = a[len(a)//2]
-    left = [x for x in a if x < pivot]
-    middle = [x for x in a if x == pivot]
-    right = [x for x in a if x > pivot]
-    return quick_sort(left) + middle + quick_sort(right)
+
+    pivot = a[end]
+    i = start - 1
+
+    for j in range(start, end):
+        if a[j] <= pivot:
+            i += 1
+            if i != j:
+                a[i], a[j] = a[j], a[i]
+                print(f"快速排序交换 {a[i]}↔{a[j]}，当前序列：{a}")
+
+    a[i + 1], a[end] = a[end], a[i + 1]
+    if i + 1 != end:
+        print(f"快速排序放置基准 {a[i + 1]}，当前序列：{a}")
+
+    quick_sort(a, start, i)
+    quick_sort(a, i + 2, end)
+    return a
 
 def merge_sort(a):
     if len(a) <= 1:
         return a
-    mid = len(a)//2
+        
+    mid = len(a) // 2
     left = merge_sort(a[:mid])
     right = merge_sort(a[mid:])
-    return merge(left, right)
+    print(f"归并排序分解：左半部分 {left}，右半部分 {right}")
+    result = merge(left, right)
+    print(f"归并排序合并结果：{result}")
+    return result
 
 def merge(left, right):
     result = []
@@ -47,9 +68,11 @@ def merge(left, right):
     while i < len(left) and j < len(right):
         if left[i] < right[j]:
             result.append(left[i])
+            print(f"归并取左边元素 {left[i]}")
             i += 1
         else:
             result.append(right[j])
+            print(f"归并取右边元素 {right[j]}")
             j += 1
     result.extend(left[i:])
     result.extend(right[j:])
@@ -59,13 +82,17 @@ def shell_sort(a):
     n = len(a)
     gap = n // 2
     while gap > 0:
+        print(f"希尔排序当前间隔：{gap}")
         for i in range(gap, n):
             temp = a[i]
             j = i
             while j >= gap and a[j - gap] > temp:
                 a[j] = a[j - gap]
+                print(f"希尔排序移动 {a[j]}→位置{j}，当前序列：{a}")
                 j -= gap
             a[j] = temp
+            if j != i:
+                print(f"希尔排序插入 {temp}到位置{j}，当前序列：{a}")
         gap //= 2
     return a
 
@@ -74,20 +101,29 @@ def heap_sort(a):
         largest = i
         l = 2 * i + 1
         r = 2 * i + 2
+        
         if l < n and a[i] < a[l]:
             largest = l
         if r < n and a[largest] < a[r]:
             largest = r
+            
         if largest != i:
             a[i], a[largest] = a[largest], a[i]
+            print(f"堆排序调整 {a[i]}↔{a[largest]}，当前序列：{a}")
             heapify(a, n, largest)
     
     n = len(a)
+    # Build max heap
     for i in range(n//2 - 1, -1, -1):
         heapify(a, n, i)
+        print(f"堆排序建堆阶段，当前序列：{a}")
+    
+    # Extract elements from heap one by one
     for i in range(n-1, 0, -1):
         a[i], a[0] = a[0], a[i]
+        print(f"堆排序取出最大值 {a[i]}，当前序列：{a}")
         heapify(a, i, 0)
+    
     return a
 
 if __name__ == "__main__":
