@@ -10,7 +10,7 @@ def insertion_sort(a):
     for i in range(1,len(a)):
         while i>0 and a[i]<a[i-1]:
             a[i], a[i-1] = a[i-1], a[i]
-            print(f"插入移动 {a[i]}→位置{i}，当前序列：{a}")
+            print(f"插入移动 {a[i]}→位置{i+1}，当前序列：{a}")
             i -= 1
     return a
 
@@ -20,8 +20,9 @@ def selection_sort(a):
         for j in range(i+1, len(a)):
             if a[j] < a[min_idx]:
                 min_idx = j
-        a[i], a[min_idx] = a[min_idx], a[i]
-        print(f"选择交换 {a[i]}↔{a[min_idx]}，当前序列：{a}")
+        if min_idx != i:  # Only swap and print if a new minimum was found
+            a[i], a[min_idx] = a[min_idx], a[i]
+            print(f"选择交换 {a[i]}↔{a[min_idx]}，当前序列：{a}")
     return a
 
 def quick_sort(a, start=None, end=None):
@@ -84,15 +85,19 @@ def shell_sort(a):
     while gap > 0:
         print(f"希尔排序当前间隔：{gap}")
         for i in range(gap, n):
-            temp = a[i]
+            temp = a[i]  # Store the current element
             j = i
+            
+            # Shift elements that are greater than temp
             while j >= gap and a[j - gap] > temp:
                 a[j] = a[j - gap]
-                print(f"希尔排序移动 {a[j]}→位置{j}，当前序列：{a}")
+                print(f"希尔排序移动 {a[j]}→位置{j+1}，当前序列：{a}")
                 j -= gap
-            a[j] = temp
-            if j != i:
-                print(f"希尔排序插入 {temp}到位置{j}，当前序列：{a}")
+            
+            # Place temp in its correct position
+            if j != i:  # Only update and print if position changed
+                a[j] = temp
+                print(f"希尔排序插入 {temp}到位置{j+1}，当前序列：{a}")
         gap //= 2
     return a
 

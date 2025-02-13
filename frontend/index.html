@@ -3,65 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorting Visualizer</title>
-    <!-- Update CSS path if using Vue CLI/Vite structure -->
+    <title>Algorithm Sorting Visualizer</title>
     <link rel="stylesheet" href="src/assets/main.css">
-    <!-- Use specific Vue.js version -->
     <script src="https://unpkg.com/vue@3.3.4"></script>
 </head>
 <body>
     <div id="app" class="container">
-        <h1>Sorting Visualizer</h1>
+        <h1>Algorithm Sorting Visualizer</h1>
         
         <div class="input-section">
             <div class="method-selector">
-                <label for="sortMethod">Select Sorting Method:</label>
-                <!-- Add id attribute to match label -->
+                <label for="sortMethod">选择排序算法：</label>
                 <select v-model="sortMethod" id="sortMethod">
-                    <option value="bubble">Bubble Sort</option>
-                    <option value="insertion">Insertion Sort</option>
-                    <option value="selection">Selection Sort</option>
-                    <option value="merge">Merge Sort</option>
-                    <option value="quick">Quick Sort</option>
-                    <option value="shell">Shell Sort</option>
-                    <option value="heap">Heap Sort</option>
+                    <option value="bubble">冒泡排序 (Bubble Sort)</option>
+                    <option value="insertion">插入排序 (Insertion Sort)</option>
+                    <option value="selection">选择排序 (Selection Sort)</option>
+                    <option value="merge">归并排序 (Merge Sort)</option>
+                    <option value="quick">快速排序 (Quick Sort)</option>
+                    <option value="shell">希尔排序 (Shell Sort)</option>
+                    <option value="heap">堆排序 (Heap Sort)</option>
                 </select>
             </div>
 
+            <div class="algorithm-description">
+                <p>{{ currentDescription }}</p>
+            </div>
+
             <div class="numbers-input">
-                <label>Enter 5 Numbers:</label>
+                <label>请输入5个数字：</label>
                 <div class="input-group">
-                    <input type="number" v-model="numbers[0]" placeholder="Number 1" class="number-input">
-                    <input type="number" v-model="numbers[1]" placeholder="Number 2" class="number-input">
-                    <input type="number" v-model="numbers[2]" placeholder="Number 3" class="number-input">
-                    <input type="number" v-model="numbers[3]" placeholder="Number 4" class="number-input">
-                    <input type="number" v-model="numbers[4]" placeholder="Number 5" class="number-input">
+                    <input type="number" v-model="numbers[0]" placeholder="第1个数字" class="number-input">
+                    <input type="number" v-model="numbers[1]" placeholder="第2个数字" class="number-input">
+                    <input type="number" v-model="numbers[2]" placeholder="第3个数字" class="number-input">
+                    <input type="number" v-model="numbers[3]" placeholder="第4个数字" class="number-input">
+                    <input type="number" v-model="numbers[4]" placeholder="第5个数字" class="number-input">
                 </div>
             </div>
 
             <button @click="sortNumbers" :disabled="isLoading">
-                {{ isLoading ? 'Sorting...' : 'Sort Numbers' }}
+                {{ isLoading ? '排序中...' : '开始排序' }}
             </button>
         </div>
 
         <div class="output-section">
             <div class="steps-container">
-                <h2>Sorting Steps:</h2>
+                <h2>排序步骤：</h2>
                 <div class="steps-list">
                     <div v-for="(step, index) in sortingSteps" 
                          :key="index" 
                          class="step-item">
-                        Step {{ index + 1 }}: {{ step }}
+                        第 {{ index + 1 }} 步：{{ step }}
                     </div>
                 </div>
             </div>
             <div class="result-container">
-                <h2>Final Result:</h2>
+                <h2>最终结果：</h2>
                 <div class="result">{{ sortingResult }}</div>
             </div>
         </div>
     </div>
-    <!-- Update script path if using Vue CLI/Vite structure -->
     <script src="src/main.js"></script>
 </body>
 </html>
