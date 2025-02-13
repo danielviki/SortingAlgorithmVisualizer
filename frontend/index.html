@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorting Visualizer</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Update CSS path if using Vue CLI/Vite structure -->
+    <link rel="stylesheet" href="src/assets/main.css">
+    <!-- Use specific Vue.js version -->
+    <script src="https://unpkg.com/vue@3.3.4"></script>
 </head>
 <body>
-    <div class="container">
+    <div id="app" class="container">
         <h1>Sorting Visualizer</h1>
         
         <div class="input-section">
             <div class="method-selector">
                 <label for="sortMethod">Select Sorting Method:</label>
-                <select id="sortMethod">
+                <!-- Add id attribute to match label -->
+                <select v-model="sortMethod" id="sortMethod">
                     <option value="bubble">Bubble Sort</option>
                     <option value="insertion">Insertion Sort</option>
                     <option value="selection">Selection Sort</option>
@@ -27,28 +31,37 @@
             <div class="numbers-input">
                 <label>Enter 5 Numbers:</label>
                 <div class="input-group">
-                    <input type="number" class="number-input" placeholder="Number 1">
-                    <input type="number" class="number-input" placeholder="Number 2">
-                    <input type="number" class="number-input" placeholder="Number 3">
-                    <input type="number" class="number-input" placeholder="Number 4">
-                    <input type="number" class="number-input" placeholder="Number 5">
+                    <input type="number" v-model="numbers[0]" placeholder="Number 1" class="number-input">
+                    <input type="number" v-model="numbers[1]" placeholder="Number 2" class="number-input">
+                    <input type="number" v-model="numbers[2]" placeholder="Number 3" class="number-input">
+                    <input type="number" v-model="numbers[3]" placeholder="Number 4" class="number-input">
+                    <input type="number" v-model="numbers[4]" placeholder="Number 5" class="number-input">
                 </div>
             </div>
 
-            <button id="sortButton">Sort Numbers</button>
+            <button @click="sortNumbers" :disabled="isLoading">
+                {{ isLoading ? 'Sorting...' : 'Sort Numbers' }}
+            </button>
         </div>
 
         <div class="output-section">
             <div class="steps-container">
                 <h2>Sorting Steps:</h2>
-                <div id="sortingSteps" class="steps-list"></div>
+                <div class="steps-list">
+                    <div v-for="(step, index) in sortingSteps" 
+                         :key="index" 
+                         class="step-item">
+                        Step {{ index + 1 }}: {{ step }}
+                    </div>
+                </div>
             </div>
             <div class="result-container">
                 <h2>Final Result:</h2>
-                <div id="sortingResult" class="result"></div>
+                <div class="result">{{ sortingResult }}</div>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <!-- Update script path if using Vue CLI/Vite structure -->
+    <script src="src/main.js"></script>
 </body>
 </html>

@@ -80,7 +80,7 @@ export default {
         isLoading.value = true
 
         // Send request to backend
-        const response = await fetch('http://localhost:5000/api/sort', {
+        const response = await fetch('http://localhost:5001/api/sort', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

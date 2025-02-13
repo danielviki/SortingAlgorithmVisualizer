@@ -3,12 +3,25 @@ from flask_cors import CORS
 import sys
 import os
 
-# Add the parent directory to Python path to import playground
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from backend.services.playground import bubble_sort, insertion_sort, selection_sort, quick_sort, merge_sort, shell_sort, heap_sort
+# Update the import path
+from services.playground import bubble_sort, insertion_sort, selection_sort, quick_sort, merge_sort, shell_sort, heap_sort
 
 app = Flask(__name__)
-CORS(app)
+
+# Configure CORS more permissively
+CORS(app, supports_credentials=True)
+
+# Or use specific CORS configuration
+CORS(app, resources={
+    r"/api/*": {
+        "origins": "*",  # Allow all origins
+        "methods": ["POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "expose_headers": ["Content-Range", "X-Content-Range"],
+        "supports_credentials": True,
+        "max_age": 120  # Cache preflight requests for 2 minutes
+    }
+})
 
 # Global variable to store sorting steps
 sorting_steps = []
@@ -72,4 +85,4 @@ def sort():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5001)
