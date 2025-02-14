@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Noto Sans';
     src: url('./fonts/NotoSans-Regular.woff2') format('woff2');
+    src: url('./fonts/NotoSans-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -8,7 +9,8 @@
 
 @font-face {
     font-family: 'Noto Sans SC';
-    src: url('./fonts/NotoSansSC-Regular.woff2') format('woff2');
+    src: url('./fonts/NotoSansSC-Regular.woff2') formatttf('woff2');
+    src: url('./fonts/NotoSansSC-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
