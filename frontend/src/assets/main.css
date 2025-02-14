@@ -1,3 +1,21 @@
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('./fonts/NotoSans-Regular.woff2') format('woff2'),
+         url('./fonts/NotoSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans SC';
+    src: url('./fonts/NotoSansSC-Regular.woff2') format('woff2'),
+         url('./fonts/NotoSansSC-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --primary-color: #3498db;
     --secondary-color: #2ecc71;
@@ -5,13 +23,16 @@
     --border-color: #e1e8ed;
     --text-color: #2c3e50;
     --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --font-family-base: 'Noto Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 
+                       'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', 
+                       sans-serif;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
     background-color: var(--background-color);
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-family-base);
     color: var(--text-color);
 }
 
