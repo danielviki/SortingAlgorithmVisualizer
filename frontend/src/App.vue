@@ -1,64 +1,71 @@
 <template>
-  <div class="container">
-    <h1>Sorting Visualizer</h1>
-    
-    <div class="input-section">
-      <div class="method-selector">
-        <label for="sortMethod">Select Sorting Method:</label>
-        <select v-model="sortMethod">
-          <option value="bubble">Bubble Sort</option>
-          <option value="insertion">Insertion Sort</option>
-          <option value="selection">Selection Sort</option>
-          <option value="merge">Merge Sort</option>
-          <option value="quick">Quick Sort</option>
-          <option value="shell">Shell Sort</option>
-          <option value="heap">Heap Sort</option>
-        </select>
-      </div>
-
-      <div class="numbers-input">
-        <label>Enter 5 Numbers:</label>
-        <div class="input-group">
-          <input
-            v-for="(num, index) in numbers"
-            :key="index"
-            type="number"
-            v-model="numbers[index]"
-            :placeholder="`Number ${index + 1}`"
-            class="number-input"
-          >
+  <div class="app-wrapper">
+    <div class="container">
+      <h1>Sorting Visualizer</h1>
+      
+      <div class="input-section">
+        <div class="method-selector">
+          <label for="sortMethod">Select Sorting Method:</label>
+          <select v-model="sortMethod">
+            <option value="bubble">Bubble Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="selection">Selection Sort</option>
+            <option value="merge">Merge Sort</option>
+            <option value="quick">Quick Sort</option>
+            <option value="shell">Shell Sort</option>
+            <option value="heap">Heap Sort</option>
+          </select>
         </div>
-      </div>
 
-      <button @click="sortNumbers" :disabled="isLoading">
-        {{ isLoading ? 'Sorting...' : 'Sort Numbers' }}
-      </button>
-    </div>
-
-    <div class="output-section">
-      <div class="steps-container">
-        <h2>Sorting Steps:</h2>
-        <div id="sortingSteps" class="steps-list">
-          <div v-for="(step, index) in sortingSteps" 
-               :key="index" 
-               class="step-item">
-            {{ step }}
+        <div class="numbers-input">
+          <label>Enter 5 Numbers:</label>
+          <div class="input-group">
+            <input
+              v-for="(num, index) in numbers"
+              :key="index"
+              type="number"
+              v-model="numbers[index]"
+              :placeholder="`Number ${index + 1}`"
+              class="number-input"
+            >
           </div>
         </div>
+
+        <button @click="sortNumbers" :disabled="isLoading">
+          {{ isLoading ? 'Sorting...' : 'Sort Numbers' }}
+        </button>
       </div>
-      <div class="result-container">
-        <h2>Final Result:</h2>
-        <div id="sortingResult" class="result">{{ result }}</div>
+
+      <div class="output-section">
+        <div class="steps-container">
+          <h2>Sorting Steps:</h2>
+          <div id="sortingSteps" class="steps-list">
+            <div v-for="(step, index) in sortingSteps" 
+                 :key="index" 
+                 class="step-item">
+              {{ step }}
+            </div>
+          </div>
+        </div>
+        <div class="result-container">
+          <h2>Final Result:</h2>
+          <div id="sortingResult" class="result">{{ result }}</div>
+        </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
+  components: {
+    Footer
+  },
   setup() {
     const sortMethod = ref('bubble')
     const numbers = ref(Array(5).fill(''))
@@ -119,7 +126,14 @@ export default {
 </script>
 
 <style scoped>
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
+  flex: 1;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
