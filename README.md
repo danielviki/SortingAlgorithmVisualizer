@@ -1,6 +1,6 @@
 # Sorting Algorithm Visualizer
 
-A web application that visualizes various sorting algorithms using Vue.js frontend and Flask backend.
+This is my 1st Project: A web application that visualizes various sorting algorithms using Vue.js frontend and Flask backend.
 
 ## Features
 
