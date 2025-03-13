@@ -88,4 +88,5 @@ def sort():
         return jsonify({'error': 'An internal server error occurred'}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    debug_mode = os.environ.get('FLASK_ENV') == 'development'
+    app.run(debug=debug_mode, port=5001)
