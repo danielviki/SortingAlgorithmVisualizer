@@ -82,7 +82,10 @@ def sort():
         })
     except Exception as e:
         builtins.print = original_print
-        return jsonify({'error': str(e)}), 500
+        # Log the actual error server-side
+        app.logger.error(f'Sorting error: {str(e)}')
+        # Return generic error message to client
+        return jsonify({'error': 'An internal server error occurred'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
